@@ -15,18 +15,37 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1> Generate a random Doggo </h1>
+                <h1> Search for your favorite dog</h1>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <form method="GET" action="/random">
+               
+                <form method="GET" action="/search">
+                    <div class="mb-3">
+                        <label for="q">Search via breed</label>
+                        <input type="text" name="breedName" id="q" class="form-control" required>
+                    </div>
                     <div class="mb03 d-flex justify-content-end">
+                    
                         <button type="submit" class="btn btn-info btn-lg">
-                            Generate
+                            Search
                         </button>
                     </div>
                 </form>
+                <br>
+
+                <h3>Or</h3>
+                <form method="GET" action="/random">
+                    <div class="mb03 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-info btn-lg">
+                            Generate a random Dog
+                        </button>
+                    </div>
+                </form>
+
+
+
             </div>
         </div>
 </body>
