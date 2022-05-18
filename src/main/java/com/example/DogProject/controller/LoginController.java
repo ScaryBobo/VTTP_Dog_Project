@@ -7,6 +7,7 @@ import com.example.DogProject.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +24,14 @@ public class LoginController {
 
     @GetMapping (path="/login")
     public String userLogin(@RequestParam (name="username") String username, 
-                            @RequestParam (name="password") String password) {
+                            @RequestParam (name="password") String password, Model model) {
     
     Optional<String> verifyifUserExist = userSvc.findUserByUsername(username); 
     if (!verifyifUserExist.isEmpty()){
         return "search";
     } else {
-        return "error";
+        model.addAttribute("error", "Invalid Login");
+        return "index";
     }
    
 

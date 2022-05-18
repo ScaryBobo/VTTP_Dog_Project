@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.example.DogProject.model.Breed;
+import com.example.DogProject.DogApiModels.QueryBreedApiModel.SearchBreedResp;
+import com.example.DogProject.DogApiModels.RandomDogApiModel.Breed;
+import com.example.DogProject.DogApiModels.RandomDogApiModel.GenDog;
 import com.example.DogProject.model.Dog;
-import com.example.DogProject.model.GenDog;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -72,18 +74,7 @@ public class DogService {
             System.out.println("Error reading dog random api");
             System.out.println(resp.getBody());
         }
-    
-        // JsonReader reader = Json.createReader(new StringReader(resp.getBody()));
-        // JsonArray arr = reader.readArray();
-        // JsonObject obj = arr.getJsonObject(0);
 
-        // String imageUrl = obj.getString("url");
-        // JsonArray breeds = obj.getJsonArray("breeds");
-        // JsonObject breedObj = breeds.getJsonObject(0);
-        // String dogName = breedObj.getString("name");
-
-    
-        
         return dog;
     } 
 
@@ -100,14 +91,28 @@ public class DogService {
 
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = template.exchange(req, String.class);
-        JsonReader reader = Json.createReader(new StringReader(resp.getBody()));
-        JsonArray arr = reader.readArray();
-        JsonObject obj = arr.getJsonObject(0);
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
         Dog dog = new Dog();
-      
-        JsonArray breeds = obj.getJsonArray("breeds");
-        String dogName = breeds.getJsonObject(0).getString("name");
-        dog.setDogName(dogName);
+
+        try {
+            List<SearchBreedResp> searchBreedResps = Arrays.asList(objectMapper.readValue(resp.getBody(), SearchBreedResp[].class));
+            SearchBreedResp searchBreedResp = searchBreedResps.get(0);
+            dog.setDogName(searchBreedResp.getName());
+            dog.setDogHeight(searchBreedResp.getHeight().getMetric());
+            dog.setDogWeight(searchBreedResp.getWeight().getMetric());
+            dog.setBredPurpose(searchBreedResp.getBredFor());
+            dog.setBreedGroup(searchBreedResp.getBreedGroup());
+            dog.setLifeSpan(searchBreedResp.getLifeSpan());
+            dog.setTemperament(searchBreedResp.getTemperament());
+
+        } catch (Exception e) {
+           e.printStackTrace();
+           System.out.println("Error reading dog random api");
+           System.out.println(resp.getBody());
+
+        }
 
         return dog;
     }

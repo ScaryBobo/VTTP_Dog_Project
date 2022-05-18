@@ -1,5 +1,5 @@
 
-package com.example.DogProject.model;
+package com.example.DogProject.DogApiModels.RandomDogApiModel;
 
 import java.util.HashMap;
 import java.util.List;

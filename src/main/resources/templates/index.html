@@ -12,6 +12,11 @@
 </head>
 <body>
     <div class="container">
+       <div th:if="${error !=null}" >
+            <div class="alert alert-danger" role="alert">
+                <p>Invalid login</p>
+            </div>
+        </div> 
         <div class="row">
             <div class="col">
                 <h1> Login  </h1>
@@ -20,6 +25,8 @@
         <div class="row">
             <div class="col">
                 <form method="get" action="/login">
+                    
+
                     <div class="mb-3">
                         <label for="q">Username</label>
                         <input type="text" name="username" id="q" class="form-control" required>
@@ -28,6 +35,9 @@
                         <label for="q">Password</label>
                         <input type="password" name="password" id="q" class="form-control" required minlength="8">
                     </div>
+                    
+
+
                     <div class="mb03 d-flex justify-content-end">
                         <button type="submit" class="btn btn-info btn-lg">
                             Login

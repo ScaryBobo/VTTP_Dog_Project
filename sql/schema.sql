@@ -16,8 +16,8 @@ create table generated_images_tbl (
     generated_id int auto_increment, 
     user_id int (8) not null,
     username varchar (64) not null,
-    images mediumblob,
-    timestamp varchar(64),
+    imagesUrl varchar(256),
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     primary key(generated_id),
     constraint fk_user_id

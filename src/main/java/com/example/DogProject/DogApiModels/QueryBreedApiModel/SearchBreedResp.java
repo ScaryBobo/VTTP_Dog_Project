@@ -1,5 +1,5 @@
 
-package com.example.DogProject.model;
+package com.example.DogProject.DogApiModels.QueryBreedApiModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,48 +13,58 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "weight",
-    "height",
-    "id",
-    "name",
     "bred_for",
     "breed_group",
+    "height",
+    "id",
     "life_span",
+    "name",
+    "reference_image_id",
     "temperament",
-    "reference_image_id"
+    "weight"
 })
 @Generated("jsonschema2pojo")
-public class Breed {
+public class SearchBreedResp {
 
-    @JsonProperty("weight")
-    private Weight weight;
-    @JsonProperty("height")
-    private Height height;
-    @JsonProperty("id")
-    private Integer id;
-    @JsonProperty("name")
-    private String name;
     @JsonProperty("bred_for")
     private String bredFor;
     @JsonProperty("breed_group")
     private String breedGroup;
+    @JsonProperty("height")
+    private Height height;
+    @JsonProperty("id")
+    private Integer id;
     @JsonProperty("life_span")
     private String lifeSpan;
-    @JsonProperty("temperament")
-    private String temperament;
+    @JsonProperty("name")
+    private String name;
     @JsonProperty("reference_image_id")
     private String referenceImageId;
+    @JsonProperty("temperament")
+    private String temperament;
+    @JsonProperty("weight")
+    private Weight weight;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("weight")
-    public Weight getWeight() {
-        return weight;
+    @JsonProperty("bred_for")
+    public String getBredFor() {
+        return bredFor;
     }
 
-    @JsonProperty("weight")
-    public void setWeight(Weight weight) {
-        this.weight = weight;
+    @JsonProperty("bred_for")
+    public void setBredFor(String bredFor) {
+        this.bredFor = bredFor;
+    }
+
+    @JsonProperty("breed_group")
+    public String getBreedGroup() {
+        return breedGroup;
+    }
+
+    @JsonProperty("breed_group")
+    public void setBreedGroup(String breedGroup) {
+        this.breedGroup = breedGroup;
     }
 
     @JsonProperty("height")
@@ -77,6 +87,16 @@ public class Breed {
         this.id = id;
     }
 
+    @JsonProperty("life_span")
+    public String getLifeSpan() {
+        return lifeSpan;
+    }
+
+    @JsonProperty("life_span")
+    public void setLifeSpan(String lifeSpan) {
+        this.lifeSpan = lifeSpan;
+    }
+
     @JsonProperty("name")
     public String getName() {
         return name;
@@ -87,34 +107,14 @@ public class Breed {
         this.name = name;
     }
 
-    @JsonProperty("bred_for")
-    public String getBredFor() {
-        return bredFor;
+    @JsonProperty("reference_image_id")
+    public String getReferenceImageId() {
+        return referenceImageId;
     }
 
-    @JsonProperty("bred_for")
-    public void setBredFor(String bredFor) {
-        this.bredFor = bredFor;
-    }
-
-    @JsonProperty("breed_group")
-    public String getBreedGroup() {
-        return breedGroup;
-    }
-
-    @JsonProperty("breed_group")
-    public void setBreedGroup(String breedGroup) {
-        this.breedGroup = breedGroup;
-    }
-
-    @JsonProperty("life_span")
-    public String getLifeSpan() {
-        return lifeSpan;
-    }
-
-    @JsonProperty("life_span")
-    public void setLifeSpan(String lifeSpan) {
-        this.lifeSpan = lifeSpan;
+    @JsonProperty("reference_image_id")
+    public void setReferenceImageId(String referenceImageId) {
+        this.referenceImageId = referenceImageId;
     }
 
     @JsonProperty("temperament")
@@ -127,14 +127,14 @@ public class Breed {
         this.temperament = temperament;
     }
 
-    @JsonProperty("reference_image_id")
-    public String getReferenceImageId() {
-        return referenceImageId;
+    @JsonProperty("weight")
+    public Weight getWeight() {
+        return weight;
     }
 
-    @JsonProperty("reference_image_id")
-    public void setReferenceImageId(String referenceImageId) {
-        this.referenceImageId = referenceImageId;
+    @JsonProperty("weight")
+    public void setWeight(Weight weight) {
+        this.weight = weight;
     }
 
     @JsonAnyGetter

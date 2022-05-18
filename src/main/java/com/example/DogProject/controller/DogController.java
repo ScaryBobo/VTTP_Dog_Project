@@ -3,6 +3,7 @@ package com.example.DogProject.controller;
 
 
 
+import com.example.DogProject.model.Dog;
 import com.example.DogProject.service.DogService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,16 @@ public class DogController {
     @GetMapping (path="/random")
     public ModelAndView getRandomDogImages (){
         ModelAndView mvc = new ModelAndView();
-        String imageUrl = dogSvc.getRandomDog().getDogImageUrl();
-        String dogName = dogSvc.getRandomDog().getDogName();
-        String dogHeight = dogSvc.getRandomDog().getDogHeight();
-        String dogWeight = dogSvc.getRandomDog().getDogWeight();
-        String bredPurpose = dogSvc.getRandomDog().getBredPurpose();
-        String breedGroup = dogSvc.getRandomDog().getBreedGroup();
-        String lifespan = dogSvc.getRandomDog().getLifeSpan();
-        String temperament = dogSvc.getRandomDog().getTemperament();
+        Dog dog = dogSvc.getRandomDog();
+
+        String imageUrl = dog.getDogImageUrl();
+        String dogName = dog.getDogName();
+        String dogHeight = dog.getDogHeight();
+        String dogWeight = dog.getDogWeight();
+        String bredPurpose = dog.getBredPurpose();
+        String breedGroup = dog.getBreedGroup();
+        String lifespan = dog.getLifeSpan();
+        String temperament = dog.getTemperament();
         mvc.setViewName("imagepreview");
         mvc.addObject("image",imageUrl );
         mvc.addObject("dogName", dogName);
@@ -42,19 +45,31 @@ public class DogController {
         mvc.addObject("breedGroup", breedGroup);
         mvc.addObject("lifespan", lifespan);
         mvc.addObject("temperament", temperament);
-        
+
         return mvc;
     }
 
     @GetMapping (path="/search")
     public ModelAndView dogQuery(@RequestParam (name="breedName") String breedName){
         ModelAndView mvc = new ModelAndView();
-       
-        String imageUrl = dogSvc.queryDog(breedName).getDogImageUrl();
-        String dogName = dogSvc.queryDog(breedName).getDogName();
-        // mvc.setViewName("imagepreview");
-        // mvc.addObject("image",imageUrl );
+        System.out.println("breed name " + breedName);
+        Dog dog = dogSvc.queryDog(breedName.trim());
+        String dogName = dog.getDogName();
+        String dogHeight = dog.getDogHeight();
+        String dogWeight = dog.getDogWeight();
+        String bredPurpose = dog.getBredPurpose();
+        String breedGroup = dog.getBreedGroup();
+        String lifespan = dog.getLifeSpan();
+        String temperament = dog.getTemperament();
+        
+        mvc.setViewName("imagepreview");
         mvc.addObject("dogName", dogName);
+        mvc.addObject("dogHeight", dogHeight);
+        mvc.addObject("dogWeight", dogWeight);
+        mvc.addObject("bredPurpose", bredPurpose);
+        mvc.addObject("breedGroup", breedGroup);
+        mvc.addObject("lifespan", lifespan);
+        mvc.addObject("temperament", temperament);
         return mvc;
         
     }
