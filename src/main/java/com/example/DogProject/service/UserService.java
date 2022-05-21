@@ -14,78 +14,40 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
-
     public Optional<User> findUserByUserId (Integer userId){
-
-        Optional<User> opt = userRepo.getUserByUserId(userId);
-        if (opt.isEmpty())
-            return Optional.empty();
-        User user = opt.get();
-        return Optional.of(user);
+        return userRepo.getUserByUserId(userId);
+    
     }
 
     public Optional<Integer> findUserIdByUsername (String username){
-        Optional <Integer> opt = userRepo.getUserIdByUsername(username);
-        if (opt.isEmpty()){
-            return Optional.empty();
-        } else {
-            return Optional.of(opt.get());
-        }
+         return userRepo.getUserIdByUsername(username);
     }
 
     public Optional<String> findUserRecordByUsername (String username){
-        Optional <String> opt = userRepo.getUserRecordByUsername(username);
-        if (opt.isEmpty()){
-            return Optional.empty();
-        } else {
-            return Optional.of(opt.get());
-        }
+        return userRepo.getUserRecordByUsername(username);
     }
 
-
-
-
     public boolean insertUser (User user){
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-        Integer userId = Integer.parseInt(String.format("%06d", number));
-
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String email = user.getEmail();
-        
-        boolean addedSuccess = userRepo.insertNewUser(userId, username, password, email);
-    
-            if (addedSuccess) {
-                return true;
-            } else {
-                return false;
-            } 
+        return userRepo.insertNewUser(
+            getUserId(), 
+            user.getUsername(), 
+            user.getPassword(), 
+            user.getEmail());
     }   
     
     public Optional<String> checkDuplicateEmail (User user) {
-        String email = user.getEmail();
-        Optional<String> opt = userRepo.getUserRecordByEmail(email);
-        if (opt.isPresent()){
-            return Optional.of(email);
-            } else {
-            return Optional.empty();
-            }
+        return userRepo.getUserRecordByEmail(user.getEmail());
     }
 
     public Optional<String> checkDuplicateUsername (User user) {
-        String username = user.getUsername();
-
-        Optional<String> opt = userRepo.getUserRecordByUsername(username);
-        if (opt.isPresent()){
-            return Optional.of(username);
-        } else {
-            return Optional.empty();
-        }
+        return userRepo.getUserRecordByUsername(user.getUsername());
     }
 
-
-
+    private int getUserId(){
+        Random rnd = new Random();
+        return Integer.parseInt(
+            String.format("%06d", rnd.nextInt(999999)));
+    }
 }
 
 

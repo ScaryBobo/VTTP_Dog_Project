@@ -28,6 +28,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class DogService {
     @Autowired
     private GeneratedImageRepository genImgRepo;
+
+    private RestTemplate template = new RestTemplate();
    
     //DOG_API_KEY
     @Value("${dog.api.key}")
@@ -44,7 +46,6 @@ public class DogService {
                     .accept(MediaType.APPLICATION_JSON)
                     .build();
         
-        RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = template.exchange(req, String.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -118,11 +119,7 @@ public class DogService {
         boolean addedSuccess = genImgRepo.insertNewRandomImgRecord(userId, dogName, dogHeight, dogWeight,
                                                                     bredPurpose, breedGroup, lifespan,
                                                                     temperament,imageUrl);
-        if (addedSuccess) {
-            return true;
-        } else {
-            return false;
-        } 
+       return addedSuccess;
     }
 
     public boolean insertQuerySearchHistory(Integer userId, String dogName, String dogHeight,
@@ -131,11 +128,7 @@ public class DogService {
         boolean addedSuccess = genImgRepo.insertNewQueryRecord(userId, dogName, dogHeight, dogWeight,
                                                                     bredPurpose, breedGroup, lifespan,
                                                                     temperament);
-        if (addedSuccess) {
-            return true;
-        } else {
-            return false;
-        } 
+      return addedSuccess;
     }
 
     

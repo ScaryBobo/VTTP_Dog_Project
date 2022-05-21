@@ -19,7 +19,7 @@ public class UserRepository {
     public Optional<User> getUserByUserId(Integer userId) {
   
         final SqlRowSet result = template.queryForRowSet(
-            "select * from user where userId like ?", userId
+            "select * from user where user_id like ?", userId
         );
         if (!result.next())
             return Optional.empty();
@@ -65,8 +65,4 @@ public class UserRepository {
 
         return Optional.of(result.getString("email"));
     }
-    
-
-    
-
 }
