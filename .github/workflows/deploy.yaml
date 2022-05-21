@@ -1,0 +1,19 @@
+name: Deploy to heroku
+on:
+  push:
+    tags:
+     - 'v*'
+     - '!v-alpha*'
+jobs:
+  deploy_to_heroku:
+    runs-on: ubuntu-latest
+    steps: 
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: deploy to heroku 
+       uses: akhileshns/heroku-deploy@v3.12.12
+       with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: leslie-bear-app
+          heroku_email: "leslielowgy@gmail.com"
+          branch: ${{github.ref_name}}

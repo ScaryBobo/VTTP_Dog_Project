@@ -34,7 +34,7 @@ public class UserRepository {
         return rowcount > 0;
     }
    
-    public Optional<String> getUserIdByUsername(String username) {
+    public Optional<Integer> getUserIdByUsername(String username) {
   
         final SqlRowSet result = template.queryForRowSet(
             "select user_id from user where username like ?", username
@@ -42,7 +42,7 @@ public class UserRepository {
         if (!result.next())
             return Optional.empty();
 
-        return Optional.of(result.getString("user_id"));
+        return Optional.of(result.getInt("user_id"));
     }
     public Optional<String> getUserRecordByUsername(String username) {
   
@@ -54,7 +54,19 @@ public class UserRepository {
 
         return Optional.of(result.getString("username"));
     }
+
+    public Optional<String> getUserRecordByEmail(String email) {
+  
+        final SqlRowSet result = template.queryForRowSet(
+            "select email from user where email like ?", email
+        );
+        if (!result.next())
+            return Optional.empty();
+
+        return Optional.of(result.getString("email"));
+    }
     
+
     
 
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Result</title>
+    <title>Search History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css"
         integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,72 +14,59 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Dog Search Result</h1>
+                <h1>Latest Dog Search History</h1>
             </div>
         </div>
         
-        <div class="row mb-3" th:if="${image != null}">
-                <img data-th-src="${image}" class="img-fluid">
-        </div>
+        <div th:each="dog : ${dogs}">
 
-        <table th:if="${dogName != null}" class="table table-striped">
+        <div class="row mb-3" th:if="${dog.imageUrl != null}">
+                <img data-th-src="${dog.imageUrl}" class="img-fluid" height="400px" width="400px">
+        </div>
+      
+        
+        <table class="table table-striped">
             <thead>
               <tr>
                 <th scope="row" style="text-align:centre">
-                  <p data-th-text="${dogName} ?: 'Not available'"></p>  </th>
+                  <p data-th-text="${dog.dogName} ?: 'Not available'"></p>  </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th scope="row">Height(cm):</th>
-                <td data-th-text="${dogHeight} ?: 'Not available'"></td> 
+                <td data-th-text="${dog.dogHeight} ?: 'Not available'"></td> 
         
               </tr>
               <tr>
                 <th scope="row">Weight(kg):</th>
-                <td data-th-text="${dogWeight} ?: 'Not available'"></td> 
+                <td data-th-text="${dog.dogWeight} ?: 'Not available'"></td> 
                 
               </tr>
               <tr>
                 <th scope="row">Bred purpose:</th>
-                <td data-th-text="${bredPurpose} ?: 'Not available'"></td>
+                <td data-th-text="${dog.bredPurpose} ?: 'Not available'"></td>
               </tr>
 
               <tr>
                 <th scope="row">Breed group:</th>
-                <td data-th-text="${breedGroup} ?: 'Not available'"></td>
+                <td data-th-text="${dog.breedGroup} ?: 'Not available'"></td>
               </tr>
 
               <tr>
-                <th scope="row">Life span:</th>
-                <td data-th-text="${lifespan} ?: 'Not available'"></td>
+                <th scope="row">Lifespan:</th>
+                <td data-th-text="${dog.lifeSpan} ?: 'Not available'"></td>
               </tr>
 
               <tr>
                 <th scope="row">Temperament:</th>
-                <td data-th-text="${temperament} ?: 'Not available'"></td>
+                <td data-th-text="${dog.temperament} ?: 'Not available'"></td>
               </tr>
 
             </tbody>
         </table>
-        <form method="GET" action="/history">
-          <div class="mb03 d-flex justify-content-center">
-              <button type="submit" class="btn btn-info btn-lg">
-                  View latest search history
-              </button>
-          </div>
-      </form>
-      <br>
-
-        <span th:if="${dogName == null}" >
-          <form method="GET" action="/random">
-            <div class="mb03 d-flex justify-content-center">
-                <button type="submit" class="btn btn-info btn-lg">
-                    Get a new dog
-                </button>
-            </div>
-        </form>
-        </span>
+      </div>
+        
         <div class="row mt-3 mb-5">
             <div class="col d-flex justify-content-end">
               <button onclick="history.back()" class="btn btn-info btn-lg">Go Back</button>

@@ -1,6 +1,11 @@
 package com.example.DogProject.model;
 
-public class Dog {
+import java.io.Serializable;
+
+public class Dog implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+
     private String dogName;
     private String dogWeight;
     private String dogHeight;
@@ -9,8 +14,16 @@ public class Dog {
     private String lifeSpan;
     private String temperament;
     private String dogImageUrl;
-    private String imageId;
+    
+    private String imageUrl;
 
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getDogWeight() {
         return dogWeight;
@@ -18,12 +31,7 @@ public class Dog {
     public void setDogWeight(String dogWeight) {
         this.dogWeight = dogWeight;
     }
-    public String getImageId() {
-        return imageId;
-    }
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
-    }
+  
     public String getDogImageUrl() {
         return dogImageUrl;
     }

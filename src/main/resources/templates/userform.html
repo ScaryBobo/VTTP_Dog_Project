@@ -17,6 +17,17 @@
                 <h1> Create new user  </h1>
             </div>
         </div>
+        <div th:if="${dupEmailError !=null}" >
+            <div class="alert alert-danger" role="alert">
+                <p>Email already exists</p>
+            </div>
+        </div> 
+
+        <div th:if="${dupUsernameError !=null}" >
+            <div class="alert alert-danger" role="alert">
+                <p>Username already exists</p>
+            </div>
+        </div> 
         <div class="row">
             <div class="col">
                 <form method="post" action="/create">

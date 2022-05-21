@@ -1,6 +1,6 @@
 package com.example.DogProject.service;
 
-import java.io.StringReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,12 +9,11 @@ import com.example.DogProject.DogApiModels.QueryBreedApiModel.SearchBreedResp;
 import com.example.DogProject.DogApiModels.RandomDogApiModel.Breed;
 import com.example.DogProject.DogApiModels.RandomDogApiModel.GenDog;
 import com.example.DogProject.model.Dog;
+import com.example.DogProject.repository.GeneratedImageRepository;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -23,14 +22,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import jakarta.json.Json;
-import jakarta.json.JsonArray;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonReader;
+
 
 @Service
 public class DogService {
-    
+    @Autowired
+    private GeneratedImageRepository genImgRepo;
    
     //DOG_API_KEY
     @Value("${dog.api.key}")
@@ -74,7 +71,6 @@ public class DogService {
             System.out.println("Error reading dog random api");
             System.out.println(resp.getBody());
         }
-
         return dog;
     } 
 
@@ -113,10 +109,54 @@ public class DogService {
            System.out.println(resp.getBody());
 
         }
-
         return dog;
     }
 
+    public boolean insertRandomSearchHistory(Integer userId, String dogName, String dogHeight,
+                                        String dogWeight, String bredPurpose, String breedGroup,
+                                        String lifespan, String temperament, String imageUrl){
+        boolean addedSuccess = genImgRepo.insertNewRandomImgRecord(userId, dogName, dogHeight, dogWeight,
+                                                                    bredPurpose, breedGroup, lifespan,
+                                                                    temperament,imageUrl);
+        if (addedSuccess) {
+            return true;
+        } else {
+            return false;
+        } 
+    }
+
+    public boolean insertQuerySearchHistory(Integer userId, String dogName, String dogHeight,
+                                        String dogWeight, String bredPurpose, String breedGroup,
+                                        String lifespan, String temperament){
+        boolean addedSuccess = genImgRepo.insertNewQueryRecord(userId, dogName, dogHeight, dogWeight,
+                                                                    bredPurpose, breedGroup, lifespan,
+                                                                    temperament);
+        if (addedSuccess) {
+            return true;
+        } else {
+            return false;
+        } 
+    }
+
+    
+
+    public List<Dog> getSearchHistory(Integer userId){
+        List<Dog> dogList = new ArrayList<>();
+        dogList = genImgRepo.getLatestSearchByUserId(userId);
+
+        return dogList;
+
+
+    }
+
+    public List<Dog> getLatestFiveHistory(Integer userId){
+        List<Dog> dogList = new ArrayList<>();
+        dogList = genImgRepo.getLatestFiveSearchByUserId(userId);
+
+        return dogList;
+
+
+    }
     
     
 

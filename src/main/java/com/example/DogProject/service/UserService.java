@@ -24,16 +24,26 @@ public class UserService {
         return Optional.of(user);
     }
 
-    public Optional<String> findUserByUsername (String username){
-        
-        Optional<String> opt = userRepo.getUserRecordByUsername(username);
-        
+    public Optional<Integer> findUserIdByUsername (String username){
+        Optional <Integer> opt = userRepo.getUserIdByUsername(username);
         if (opt.isEmpty()){
-        return Optional.empty();
+            return Optional.empty();
         } else {
-        return Optional.of(username);
+            return Optional.of(opt.get());
         }
     }
+
+    public Optional<String> findUserRecordByUsername (String username){
+        Optional <String> opt = userRepo.getUserRecordByUsername(username);
+        if (opt.isEmpty()){
+            return Optional.empty();
+        } else {
+            return Optional.of(opt.get());
+        }
+    }
+
+
+
 
     public boolean insertUser (User user){
         Random rnd = new Random();
@@ -43,16 +53,38 @@ public class UserService {
         String username = user.getUsername();
         String password = user.getPassword();
         String email = user.getEmail();
+        
+        boolean addedSuccess = userRepo.insertNewUser(userId, username, password, email);
     
-        boolean added = userRepo.insertNewUser(userId, username, password, email);
-    
-            if (added) {
+            if (addedSuccess) {
                 return true;
             } else {
                 return false;
+            } 
+    }   
+    
+    public Optional<String> checkDuplicateEmail (User user) {
+        String email = user.getEmail();
+        Optional<String> opt = userRepo.getUserRecordByEmail(email);
+        if (opt.isPresent()){
+            return Optional.of(email);
+            } else {
+            return Optional.empty();
             }
-        }   
-        
+    }
+
+    public Optional<String> checkDuplicateUsername (User user) {
+        String username = user.getUsername();
+
+        Optional<String> opt = userRepo.getUserRecordByUsername(username);
+        if (opt.isPresent()){
+            return Optional.of(username);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+
 
 }
 

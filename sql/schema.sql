@@ -15,7 +15,6 @@ create table user (
 create table generated_images_tbl (
     generated_id int auto_increment, 
     user_id int (8) not null,
-    username varchar (64) not null,
     imagesUrl varchar(256),
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
 
