@@ -86,7 +86,7 @@ public class DogService {
                     .accept(MediaType.APPLICATION_JSON)
                     .build();
 
-        RestTemplate template = new RestTemplate();
+       
         ResponseEntity<String> resp = template.exchange(req, String.class);
 
 
@@ -132,15 +132,6 @@ public class DogService {
     }
 
     
-
-    public List<Dog> getSearchHistory(Integer userId){
-        List<Dog> dogList = new ArrayList<>();
-        dogList = genImgRepo.getLatestSearchByUserId(userId);
-
-        return dogList;
-
-
-    }
 
     public List<Dog> getLatestFiveHistory(Integer userId){
         List<Dog> dogList = new ArrayList<>();

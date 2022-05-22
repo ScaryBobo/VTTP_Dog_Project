@@ -37,27 +37,7 @@ public class GeneratedImageRepository {
     }
     
 
-    public List<Dog> getLatestSearchByUserId(Integer userId){
-        
-        final List<Dog> dogList = new ArrayList<>();
-        final SqlRowSet rs = template.queryForRowSet(
-            "select * from generated_images_tbl  where user_id like ? order by user_id desc limit 1",userId);
-       while (rs.next()){
-            Dog dog = new Dog();
-            dog.setDogName(rs.getString("dogName"));
-            dog.setDogHeight(rs.getString("dogHeight"));
-            dog.setDogWeight(rs.getString("dogWeight"));
-            dog.setBredPurpose(rs.getString("bredPurpose"));
-            dog.setBreedGroup(rs.getString("breedGroup"));
-            dog.setLifeSpan(rs.getString("lifespan"));
-            dog.setTemperament(rs.getString("temperament"));
-            dog.setImageUrl(rs.getString("imageUrl"));
-
-            dogList.add(dog);
-        }
-        return dogList;
-
-    }
+ 
 
     public List<Dog> getLatestFiveSearchByUserId(Integer userId){
         final List<Dog> dogList = new ArrayList<>();

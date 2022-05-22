@@ -69,8 +69,8 @@
 				<configuration>
         			<excludes>
 						<exclude>**/DogApiModels/**</exclude>
-						<!-- <exclude>**/model/**</exclude> -->
-						<!-- <exclude>**/repository/**</exclude> -->
+						<exclude>**/model/**</exclude>
+						<exclude>**/repository/**</exclude>
 					</excludes>	
 				</configuration>
 				<executions>
