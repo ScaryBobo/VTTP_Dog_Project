@@ -8,8 +8,5 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class DogProjectApplicationTests {
 
-    // @Bean
-    // public UserRepository userRepository() {
-    //     return Mockito.mock(UserRepository.class);
-    // }
+    
 }
