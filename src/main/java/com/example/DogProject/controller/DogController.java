@@ -55,7 +55,7 @@ public class DogController {
         System.out.println(sess.getAttribute("username"));
         String username = sess.getAttribute("username").toString();
         Integer userId = userSvc.findUserIdByUsername(username).get();
-        boolean insertRandomSearchRecord = dogSvc.insertRandomSearchHistory(userId, dogName, dogHeight, dogWeight, bredPurpose, breedGroup, lifespan, temperament, imageUrl);
+        dogSvc.insertRandomSearchHistory(userId, dogName, dogHeight, dogWeight, bredPurpose, breedGroup, lifespan, temperament, imageUrl);
 
         return mvc;
     }
@@ -86,7 +86,7 @@ public class DogController {
         System.out.println(sess.getAttribute("username"));
         String username = sess.getAttribute("username").toString();
         Integer userId = userSvc.findUserIdByUsername(username).get();
-        boolean insertQuerySearchRecord = dogSvc.insertQuerySearchHistory(userId, dogName, dogHeight, dogWeight, bredPurpose, breedGroup, lifespan, temperament);
+        dogSvc.insertQuerySearchHistory(userId, dogName, dogHeight, dogWeight, bredPurpose, breedGroup, lifespan, temperament);
         
 
         return mvc;
@@ -96,7 +96,9 @@ public class DogController {
     @GetMapping (path="/history")
     public ModelAndView searchHistory(HttpSession sess){
         ModelAndView mvc = new ModelAndView();
+
         sess.setMaxInactiveInterval(60*60);
+        
         System.out.println(sess.getAttribute("username"));
         String username = sess.getAttribute("username").toString();
         Integer userId = userSvc.findUserIdByUsername(username).get();

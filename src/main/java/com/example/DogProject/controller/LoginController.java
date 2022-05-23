@@ -68,13 +68,8 @@ public class LoginController extends HttpServlet {
         }
 
         boolean addedSuccess = userSvc.insertUser(user);
-
-        if (addedSuccess){
-            return "insertsuccess";
-        } else {
-            return "error";
-        }
         
+        return addedSuccess ? "insertsuccess" : "error";
     }
 
     @PostMapping(path="/toLogin")
