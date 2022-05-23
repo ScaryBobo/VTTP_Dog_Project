@@ -17,6 +17,12 @@
                 <h1>Dog Search Result</h1>
             </div>
         </div>
+
+        <div th:if="${dogName ==null}" >
+          <div class="alert alert-danger" role="alert">
+              <p>Dog details not found</p>
+          </div>
+      </div> 
         
         <div class="row mb-3" th:if="${image != null}">
                 <img data-th-src="${image}" class="img-fluid">
