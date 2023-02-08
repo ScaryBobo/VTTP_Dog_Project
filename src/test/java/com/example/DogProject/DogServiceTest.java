@@ -106,7 +106,7 @@ public class DogServiceTest {
         String breedGroup = "testGroup";
         String lifespan = "1";
         String temperament = "testTemperament";
-        String imageUrl = "someUrl";
+        String imageUrl = "someUrl";    
 
         subject.insertRandomSearchHistory(userId, dogName, dogHeight, dogWeight, bredPurpose, 
                                         breedGroup, lifespan, temperament, imageUrl);
